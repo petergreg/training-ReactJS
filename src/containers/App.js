@@ -3,9 +3,16 @@ import Person from '../components/Persons/Person/Person';
 import classes from './App.css';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    console.log('[Apps.js] constructor')
+  }
+
   state = {
     persons: [
       { id: 'sef', name: 'Max', age: 28 },
@@ -14,6 +21,11 @@ class App extends Component {
     ],
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props, state){
+    console.log('[Apps.js] getDerivedStateFromProps')
+    return state;
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -41,6 +53,7 @@ class App extends Component {
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   };
+  
 
   togglePersonsHandler = (event) => {
     const doesShow = this.state.showPersons;
@@ -48,33 +61,23 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] render')
     let persons = null;
-    let btnClass = [classes.Button];
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          <Persons 
+      persons = <Persons 
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangedHandler}/>
-
-        </div> 
-      );
-      
-      btnClass.push(classes.Red);
-    }
-
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
     }
 
     return (
       <div className={classes.App}>
+        <Cockpit 
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons} 
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}/>
         {persons}
       </div>
     );
