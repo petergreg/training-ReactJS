@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Person from '../components/Persons/Person/Person';
 import classes from './App.css';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
@@ -25,6 +23,10 @@ class App extends Component {
   static getDerivedStateFromProps(props, state){
     console.log('[Apps.js] getDerivedStateFromProps')
     return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   nameChangedHandler = (event, id) => {
