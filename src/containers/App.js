@@ -29,6 +29,15 @@ class App extends Component {
     console.log('[App.js] componentDidMount');
   }
 
+  souldComponentUpdate(nextProps, nextState){
+    console.log('[App.js] souldComponentUpdate');
+    return true;
+}
+
+  componentDidUpdate(){
+    console.log('[App.js] componentDidUpdate');
+}
+
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return id === p.id;
@@ -50,7 +59,7 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     /*Using spread operator to create a NEW LIST from the originale data, so we avoid 
       modifying it. Better update states in an IMMUTABLE fashion :
-      without mutating original state */
+      without mutating original s tate */
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });

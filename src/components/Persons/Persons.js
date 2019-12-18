@@ -8,6 +8,10 @@ class Persons extends Component {
     //     return state;
     // }
 
+    // componentWillReceiveProps() {
+    //     console.log('[Persons.js] componentWillReceiveProps');
+    // }
+
     shouldComponentUpdate(nextProps, nextState){
         console.log('[Persons.js] shouldComponentUpdate');
         return true;
@@ -16,10 +20,20 @@ class Persons extends Component {
 
     getSnapshotBeforeUpdate(prevProps, prevState){
         console.log('[Persons.js] getSnapshotBeforeUpdate');
+        return { message: 'Snapshot!' };
     }
 
-    componentDidUpdate(){
+    // componentWillUpdate(){
+    //     console.log('[Persons.js] componentWillUpdate');
+    // }l
+
+    componentDidUpdate(prevProps, prevState, snapshot){
         console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot);
+    }
+
+    componentWillUnmount(){
+        console.log('[Persons.js] componentWillUnmount');
     }
 
     render(){
