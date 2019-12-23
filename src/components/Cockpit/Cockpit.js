@@ -18,6 +18,7 @@ const cockpit = (props) => {
     console.log('[Cockpit.js] 2nd use Effect');
 
     return () => {
+    
       console.log('[Cockpit.js] cleanup work in 2nd useEffect');
     }
   });
