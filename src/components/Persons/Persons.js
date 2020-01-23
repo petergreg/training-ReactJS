@@ -26,7 +26,7 @@ class Persons extends PureComponent {
         return { message: 'Snapshot!' };
     }
 
-    // componentWillUpdate(){
+    // componentWill Update(){
     //     console.log('[Persons.js] componentWillUpdate');
     // }l
 

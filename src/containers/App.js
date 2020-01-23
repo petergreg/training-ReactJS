@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WitchClass from '../hoc/WithClass';
 
 
 class App extends Component {
@@ -83,17 +84,17 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <WitchClass classes={classes.App}>
         <Cockpit 
           title={this.props.appTitle}
           showPersons={this.state.showPersons} 
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}/>
         {persons}
-      </div>
+      </WitchClass>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App !!!'));
   }
 }
 
-export default App;
+export default App; 
