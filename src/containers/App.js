@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WitchClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
 
 
 class App extends Component {
@@ -18,7 +19,8 @@ class App extends Component {
       { id: 'dza', name: 'Greg', age: 27 },
       { id: 'aaa', name: 'Steph', age: 26 }
     ],
-    showPersons: false
+    showPersons: false,
+    changedCounter: 0
   };
 
   static getDerivedStateFromProps(props, state){
@@ -54,7 +56,12 @@ class App extends Component {
     const persons = [...this.state.persons]
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    this.setState((prevState, props) => {
+        return {
+          persons: persons, 
+          changedCounter: prevState.changedCounter +1
+        }
+    });
   };
 
   deletePersonHandler = (personIndex) => {
@@ -84,17 +91,24 @@ class App extends Component {
     }
 
     return (
-      <WitchClass classes={classes.App}>
+      <Aux>
         <Cockpit 
           title={this.props.appTitle}
           showPersons={this.state.showPersons} 
           personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}/>
         {persons}
-      </WitchClass>
+      </Aux>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App !!!'));
   }
+
+
+
+
+
+
+  
 }
 
-export default App; 
+export default withClass(App, classes.App);  
